@@ -2,7 +2,6 @@
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 
 #Open LinkedIn in Chrome browser
 browser = webdriver.Chrome('/Users/ummaromanasama/Desktop/chromedriver85')
@@ -32,25 +31,40 @@ browser.find_element_by_class_name("jobs-search-box__submit-button").click()
 sleep(1.5)
 
 #Filter: Experience Level 
-browser.find_element_by_xpath("//span[text()='Experience Level']").click()
+# browser.find_element_by_xpath("//span[text()='Experience Level']").click()
+# sleep(1.5)
 
-#Checkbox: Experience Level 
-browser.find_element_by_xpath("//span[text()='Internship']").click()
-browser.find_element_by_xpath("//span[text()='Entry level']").click()
-browser.find_element_by_xpath("//span[text()='Associate']").click()
-sleep(1.5)
+# #Checkbox: Experience Level 
+# browser.find_element_by_xpath("//span[text()='Internship']").click()
+# browser.find_element_by_xpath("//span[text()='Entry level']").click()
+# browser.find_element_by_xpath("//span[text()='Associate']").click()
+# sleep(1.5)
 
-#Need help with clickong Apply, maybe I need a different approach?
+#Need help with clicking Apply, maybe I need a different approach?
 # browser.find_element_by_xpath("//button[.//span='Apply']").click()
+
+# sleep(1.5)
+
+# #Filter: Experience Level 
+# browser.find_element_by_xpath("//span[text()='Job Type']").click()
+
+# #Checkbox: Experience Level 
+# browser.find_element_by_xpath("//span[text()='Part-time']").click()
+# browser.find_element_by_xpath("//span[text()='Internship']").click()
+# sleep(1.5)
+
+browser.find_element_by_class_name("search-filters-bar__all-filters").click()
 sleep(1.5)
 
-#Filter: Experience Level 
-browser.find_element_by_xpath("//span[text()='Job Type']").click()
-
-#Checkbox: Experience Level 
-browser.find_element_by_xpath("//span[text()='Part-time']").click()
 browser.find_element_by_xpath("//span[text()='Internship']").click()
-sleep(1.5)
+
+browser.find_element_by_xpath("//span[text()='Easy Apply']").click()
+
+browser.find_element_by_xpath("//span[text()='Apply']").click()
+
+
+
+
 
 
 
