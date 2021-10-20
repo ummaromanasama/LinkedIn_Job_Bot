@@ -1,10 +1,3 @@
-# from selenium import webdriver
-# from time import sleep
-# from selenium.webdriver.common.action_chains import ActionChains
-# from selenium.common.exceptions import NoSuchElementException
-# from selenium.webdriver.common.keys import Keys
-# import re
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -51,7 +44,7 @@ def find_offers():
     sleep(1.5)
 
     #Get results
-    current_page = browser.current_url
+    # current_page = browser.current_url
     results = browser.find_elements_by_class_name("jobs-search-results__list-item.occludable-update.p0.relative.ember-view")
     
     #For each job sumbit application if no questions asked
@@ -63,32 +56,34 @@ def find_offers():
             submit_apply(title)
             
      # if there is more than one page, find the pages and apply to the results of each page
-        if total_results_int > 24:
-            sleep(2)
+        # if total_results_int > 24:
+        #     sleep(2)
 
-            # find the last page and construct url of each page based on the total amount of pages
-            find_pages = browser.find_elements_by_class_name("artdeco-pagination__indicator.artdeco-pagination__indicator--number.ember-view")
-            total_pages = find_pages[len(find_pages)-1].text
-            total_pages_int = int(re.sub(r"[^\d.]", "", total_pages))
-            get_last_page = browser.find_element_by_xpath("//button[@aria-label='Page "+str(total_pages_int)+"']")
-            sleep(2)
-            last_page = browser.current_url
-            total_jobs = int(last_page.split('start=',1)[1])
+        #     # find the last page and construct url of each page based on the total amount of pages
+        #     find_pages = browser.find_elements_by_class_name("artdeco-pagination__indicator.artdeco-pagination__indicator--number.ember-view")
+        #     total_pages = find_pages[len(find_pages)-1].text
+        #     total_pages_int = int(re.sub(r"[^\d.]", "", total_pages))
+        #     get_last_page = browser.find_element_by_xpath("//button[@aria-label='Page "+str(total_pages_int)+"']")
+        #     get_last_page.send_keys(Keys.RETURN)
+        #     sleep(2)
+        #     last_page = browser.current_url
+        #     total_jobs = int(last_page.split('start=',1)[1])
+        #     print(total_pages_int)
 
-            # go through all available pages and job offers and apply
-            for page_number in range(25,total_jobs+25,25):
-                browser.get(current_page+'&start='+str(page_number))
-                sleep(2)
-                results_ext = browser.find_elements_by_class_name("occludable-update.artdeco-list__item--offset-4.artdeco-list__item.p0.ember-view")
-                for result_ext in results_ext:
-                    hover_ext = ActionChains(browser).move_to_element(result_ext)
-                    hover_ext.perform()
-                    titles_ext = result_ext.find_elements_by_class_name('job-card-search__title.artdeco-entity-lockup__title.ember-view')
-                    for title_ext in titles_ext:
-                        submit_apply(title_ext)
+        #     # go through all available pages and job offers and apply
+        #     for page_number in range(25,total_jobs+25,25):
+        #         browser.get(current_page+'&start='+str(page_number))
+        #         sleep(2)
+        #         results_ext = browser.find_elements_by_class_name("occludable-update.artdeco-list__item--offset-4.artdeco-list__item.p0.ember-view")
+        #         for result_ext in results_ext:
+        #             hover_ext = ActionChains(browser).move_to_element(result_ext)
+        #             hover_ext.perform()
+        #             titles_ext = result_ext.find_elements_by_class_name('job-card-search__title.artdeco-entity-lockup__title.ember-view')
+        #             for title_ext in titles_ext:
+        #                 submit_apply(title_ext)
 
-        else:
-            browser.close_session()
+        # else:
+        #     browser.close_session()
   
 def submit_apply(job_add):
     """This function submits the application for the job add found"""
@@ -108,8 +103,13 @@ def submit_apply(job_add):
 
     # try to submit if submit application is available...
     try:
-        submit = browser.find_element_by_xpath("//button[data-control-name='submit_unify']")
+        submit = browser.find_element_by_xpath("//button[@data-control-name='submit_unify']")
         submit.send_keys(Keys.RETURN)
+        # browser.find_element_by_xpath("//button[@type = 'Submit application']").click()
+        print('Hooray!')
+        sleep(2)
+        close_job = browser.find_element_by_xpath("//button[@data-test-modal-close-btn']")
+        close_job.send_keys(Keys.RETURN)
 
     # ... if not available, discard application and go to next
     except NoSuchElementException:
