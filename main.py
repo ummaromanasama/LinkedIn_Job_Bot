@@ -19,7 +19,7 @@ def login_linkedin():
     sleep(1.5)
     browser.find_element_by_id('username').send_keys('email')
     sleep(1.5)
-    browser.find_element_by_id('password').send_keys('password')
+    browser.find_element_by_id('password').send_keys('password!')
     sleep(1.5)
     browser.find_element_by_xpath("//button[@type = 'submit']").click()
     sleep(1.5)
@@ -32,9 +32,14 @@ def job_search():
     browser.find_element_by_class_name('jobs-search-box__text-input').send_keys(job_title)
     sleep(1.5)
 
-    browser.find_element_by_class_name("jobs-search-box__submit-button").click()
+    search_location = browser.find_element_by_css_selector(".jobs-search-box__text-input[aria-label='City, state, or zip code']")
+    search_location.clear()
+    search_location.send_keys('New York, United States')
     sleep(1.5)
 
+    browser.find_element_by_class_name("jobs-search-box__submit-button").click()
+    sleep(1.5)
+    
     #Easy Apply
     browser.find_element_by_xpath("//button[text()='Easy Apply']").click()
 
