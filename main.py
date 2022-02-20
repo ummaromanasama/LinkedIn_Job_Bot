@@ -5,8 +5,6 @@ from time import sleep
 from selenium.common.exceptions import NoSuchElementException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 import re
-
-#This is a test comment
     
 job_title = input("Enter job title:")
 
